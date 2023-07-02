@@ -116,7 +116,7 @@ table provided by the Docker image.
 There are a total of three ports that can be utilised by the server, but only two are strictly required:
 
 | Name           | Default Port | Description                                                          | Required |
-|----------------|--------------|----------------------------------------------------------------------| -------- |
+| -------------- | ------------ | -------------------------------------------------------------------- | -------- |
 | `DEFAULT_PORT` | `16261`      | Port used by the server to listen for connections.                   | yes      |
 | `RCON_PORT`    | `27015`      | Port used by the server to listen for RCON connections/commands.     | no       |
 | `UDP_PORT`     | `16262`      | Additional Port used by the server to facilitate Client connections. | yes      |
@@ -166,10 +166,10 @@ at `/home/steam/Zomboid/Server/[name].ini`).
 Editing these values directly in the .ini file will result in them being overwritten with either the default value, or
 the configured environment variable.
 
-Any other values *can* and *should* be edited directly in the .ini file.
+Any other values _can_ and _should_ be edited directly in the .ini file.
 
 | Argument            | Description                                                                                                                             | .ini variable         | Values                 | Default       |
-|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------| --------------------- | ---------------------- | ------------- |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ---------------------- | ------------- |
 | `AUTOSAVE_INTERVAL` | Interval between autosaves in minutes                                                                                                   | SaveWorldEveryMinutes | [0-9]+                 | 15m           |
 | `DEFAULT_PORT`      | Port for other players to connect to                                                                                                    | DefaultPort           | 1000 - 65535           | 16261         |
 | `MAX_PLAYERS`       | Maximum players allowed in the Server                                                                                                   | MaxPlayers            | [0-9]+                 | 16            |
@@ -189,20 +189,20 @@ The following are instructions for running the server using the Docker image.
 
 1. Acquire the image locally:
 
-    - Pull the image from DockerHub:
+   - Pull the image from DockerHub:
 
-      ```shell
-      docker pull renegademaster/zomboid-dedicated-server:<tagname>
-      ```
+     ```shell
+     docker pull renegademaster/zomboid-dedicated-server:<tagname>
+     ```
 
-    - Or alternatively, build the image:
+   - Or alternatively, build the image:
 
-      ```shell
-      git clone https://github.com/Renegade-Master/zomboid-dedicated-server.git \
-          && cd zomboid-dedicated-server
+     ```shell
+     git clone https://github.com/Renegade-Master/zomboid-dedicated-server.git \
+         && cd zomboid-dedicated-server
 
-      docker build -t docker.io/renegademaster/zomboid-dedicated-server:<tag> -f docker/zomboid-dedicated-server.Dockerfile .
-      ```
+     docker build -t docker.io/renegademaster/zomboid-dedicated-server:<tag> -f docker/zomboid-dedicated-server.Dockerfile .
+     ```
 
 2. Run the container:
 
@@ -269,23 +269,23 @@ The following are instructions for running the server using Docker-Compose.
 
 3. Run the following commands:
 
-    - Make the data and configuration directories:
+   - Make the data and configuration directories:
 
-      ```shell
-      mkdir ZomboidConfig ZomboidDedicatedServer
-      ```
+     ```shell
+     mkdir ZomboidConfig ZomboidDedicatedServer
+     ```
 
-    - Pull the image from DockerHub:
+   - Pull the image from DockerHub:
 
-      ```shell
-      docker-compose up --detach
-      ```
+     ```shell
+     docker-compose up --detach
+     ```
 
-    - Or alternatively, build the image:
+   - Or alternatively, build the image:
 
-      ```shell
-      docker-compose up --build --detach
-      ```
+     ```shell
+     docker-compose up --build --detach
+     ```
 
 4. Optionally, reattach the terminal to the log output (**\*Note**: this is not an Interactive Terminal\*)
 

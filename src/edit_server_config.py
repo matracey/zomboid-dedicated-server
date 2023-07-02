@@ -95,15 +95,15 @@ if __name__ == "__main__":
 
         if len(sys.argv) == 3:
             # Return the value of the given key
-            if 'ServerConfig' in config:
-                if key in config['ServerConfig']:
+            if "ServerConfig" in config:
+                if key in config["ServerConfig"]:
                     print(f"{config['ServerConfig'][key]}")
         else:
             # Assign a new value
             value: str = sys.argv[3]
 
             # Set the desired value
-            config['ServerConfig'][key] = value
+            config["ServerConfig"][key] = value
 
             # Save the config file
             save_config(config, config_file)

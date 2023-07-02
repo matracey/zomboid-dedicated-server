@@ -28,18 +28,15 @@ FROM ${BASE_IMAGE}
 
 # Add metadata labels
 LABEL com.renegademaster.zomboid-dedicated-server.authors="Renegade-Master" \
-    com.renegademaster.zomboid-dedicated-server.contributors="JohnEarle, ramielrowe" \
-    com.renegademaster.zomboid-dedicated-server.source-repository="https://github.com/Renegade-Master/zomboid-dedicated-server" \
-    com.renegademaster.zomboid-dedicated-server.image-repository="https://hub.docker.com/renegademaster/zomboid-dedicated-server"
+  com.renegademaster.zomboid-dedicated-server.contributors="JohnEarle, ramielrowe" \
+  com.renegademaster.zomboid-dedicated-server.source-repository="https://github.com/Renegade-Master/zomboid-dedicated-server" \
+  com.renegademaster.zomboid-dedicated-server.image-repository="https://hub.docker.com/renegademaster/zomboid-dedicated-server"
 
 # Copy the source files
 COPY src /home/steam/
 
 # Install Python, and take ownership of rcon binary
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        python3-minimal iputils-ping tzdata \
-    && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends python3-minimal iputils-ping tzdata && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
 
 # Run the setup script
 ENTRYPOINT ["/bin/bash", "/home/steam/run_server.sh"]

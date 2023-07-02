@@ -20,16 +20,15 @@ name: Build and Test Server Image
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 defaults:
   run:
     shell: bash
 
 jobs:
-
   build-and-run:
     name: Build and Run Server
     runs-on: ubuntu-latest
