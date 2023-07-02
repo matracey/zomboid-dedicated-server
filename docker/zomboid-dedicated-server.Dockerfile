@@ -22,7 +22,7 @@
 #######################################################################
 
 # Base Image
-ARG BASE_IMAGE="docker.io/renegademaster/steamcmd-minimal:1.1.2"
+ARG BASE_IMAGE="docker.io/steamcmd/steamcmd:latest"
 
 FROM ${BASE_IMAGE}
 
@@ -36,7 +36,7 @@ LABEL com.renegademaster.zomboid-dedicated-server.authors="Renegade-Master" \
 COPY src /home/steam/
 
 # Install Python, and take ownership of rcon binary
-RUN apt-get update && apt-get install -y --no-install-recommends python3-minimal iputils-ping tzdata && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt install -y --no-install-recommends python3-minimal iputils-ping tzdata && apt autoremove -y && rm -rf /var/lib/apt/lists/*
 
 # Run the setup script
 ENTRYPOINT ["/bin/bash", "/home/steam/run_server.sh"]
