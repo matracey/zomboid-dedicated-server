@@ -29,28 +29,28 @@ import sys
 from configparser import RawConfigParser
 
 
-def save_config(config: RawConfigParser, config_file: str) -> None:
+def save_config(config_parser: RawConfigParser, config_file_path: str) -> None:
     """
     Saves the server config file
-    :param config: Dictionary of the values
-    :param config_file: Path to the server config file
+    :param config_parser: Dictionary of the values
+    :param config_file_path: Path to the server config file
     :return: None
     """
 
     # Overwrite the file value with the new value
-    with open(config_file, "w") as file:
-        config.write(file, space_around_delimiters=False)
+    with open(config_file_path, "w", encoding="utf-8") as file:
+        config_parser.write(file, space_around_delimiters=False)
 
 
-def load_config(config_file: str) -> RawConfigParser:
+def load_config(config_file_path: str) -> RawConfigParser:
     """
     Loads the server config file
-    :param config_file: Path to the server config file
+    :param config_file_path: Path to the server config file
     :return: ConfigParser Object containing the values
     """
 
     # Ensure that the file starts with a Section
-    with open(config_file, "r+") as file:
+    with open(config_file_path, "r+", encoding="utf-8") as file:
         lines = file.readlines()
         if lines[0] != "[ServerConfig]\n":
             file.seek(0)
@@ -58,27 +58,26 @@ def load_config(config_file: str) -> RawConfigParser:
             for line in lines:
                 file.write(line)
 
-    cp: RawConfigParser = RawConfigParser()
-    cp.optionxform = lambda option: option
+    config_parser: RawConfigParser = RawConfigParser()
+    config_parser.optionxform = lambda option: option
 
-    if cp.read(config_file) is not None:
-        return cp
-    else:
-        raise TypeError("Config file is invalid!")
+    if config_parser.read(config_file_path) is not None:
+        return config_parser
+    raise TypeError("Config file is invalid!")
 
 
-def check_server_config_file(config_file: str) -> bool:
+def check_server_config_file(config_file_path: str) -> bool:
     """
     Checks if the server config file exists
-    :param config_file: Path to the server config file
+    :param config_file_path: Path to the server config file
     :return: True if the file exists, False if not
     """
 
     try:
-        with open(config_file, "r") as file:
+        with open(config_file_path, "r", encoding="utf-8") as _:
             return True
     except FileNotFoundError:
-        sys.stderr.write(f"{config_file} not found!\n")
+        sys.stderr.write(f"{config_file_path} not found!\n")
         return False
 
 
