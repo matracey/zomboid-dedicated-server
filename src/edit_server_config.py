@@ -25,6 +25,7 @@ Description:
     configuration file
 """
 
+import argparse
 import sys
 from configparser import RawConfigParser
 
@@ -82,24 +83,29 @@ def check_server_config_file(config_file_path: str) -> bool:
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3 or len(sys.argv) > 4:
-        print("Usage: edit_server_config.py <config_file> <key> [<value>]")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(
+        description="Edits Project Zomboid Dedicated Server config file"
+    )
+    parser.add_argument("config_file", help="Path to the server config file")
+    parser.add_argument("key", help="Key to edit or retrieve")
+    parser.add_argument("value", nargs="?", help="New value to assign to key")
 
-    config_file: str = sys.argv[1]
-    key: str = sys.argv[2]
+    args = parser.parse_args()
+
+    config_file: str = args.config_file
+    key: str = args.key
 
     if check_server_config_file(config_file):
         config: RawConfigParser = load_config(config_file)
 
-        if len(sys.argv) == 3:
+        if args.value is None:
             # Return the value of the given key
             if "ServerConfig" in config:
                 if key in config["ServerConfig"]:
                     print(f"{config['ServerConfig'][key]}")
         else:
             # Assign a new value
-            value: str = sys.argv[3]
+            value: str = args.value
 
             # Set the desired value
             config["ServerConfig"][key] = value
